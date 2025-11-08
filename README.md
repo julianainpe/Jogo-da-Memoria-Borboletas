@@ -25,7 +25,7 @@ Este jogo foi desenvolvido com o objetivo de conscientizar a população a respe
 **Acesse a versão online do jogo aqui:**
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria/main/QRCODE.png" alt="QR Code" width="200">
+  <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/QRcode.png" alt="QR Code" width="200">
 </p>
 
 ## Funcionalidades do jogo
