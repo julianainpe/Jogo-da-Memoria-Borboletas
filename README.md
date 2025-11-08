@@ -14,7 +14,7 @@
 <p align="center"><strong>Serviços Ecossistêmicos - Borboletas</strong></p>
 
 ## Objetivo
-Este projeto apresenta uma versão online, mais simples e para dispositivos móveis do **Jogo da memória - Serviços Ecossistêmicos - Borboletas** em HTML/CSS/JavaScript. A versão física do jogo foi desenvolvida pelo **Laboratório de Ecologia de Insetos da UFRJ** e a versão online foi desenvolvida com o apoio do Laboratório de Geoprocessamento, Sensoriamento Remoto e Análise de Dados de Biodiversidade (GEODABI) do **Instituto Nacional da Mata Atlântica (INMA)**.
+Este projeto apresenta uma versão online, mais simples e para dispositivos móveis do **Jogo da memória - Serviços Ecossistêmicos - Borboletas** em HTML/CSS/JavaScript. A versão física do jogo foi desenvolvida pelo **Laboratório de Ecologia de Insetos da UFRJ** e a versão online foi desenvolvida com o apoio do **Laboratório de Geoprocessamento, Sensoriamento Remoto e Análise de Dados de Biodiversidade (GEODABI) do Instituto Nacional da Mata Atlântica (INMA)**.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria/main/versao_fisica.jpeg" width="700">
