@@ -43,3 +43,4 @@ São classificados em benefícios de: provisão, regulação, suporte e culturai
 **Versão online**
 - *Juliana Silveira* (INMA/GEODABI - organização, código e design)
 - *Beatriz Lima* (UFRJ - conteúdo científico, seleção de imagens e design)
+- Fotos de Beatriz Lima
