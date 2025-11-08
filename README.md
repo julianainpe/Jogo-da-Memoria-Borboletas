@@ -17,7 +17,7 @@
 Este projeto apresenta uma versão online, mais simples e para dispositivos móveis do **Jogo da memória - Serviços Ecossistêmicos - Borboletas** em HTML/CSS/JavaScript. A versão física do jogo foi desenvolvida pelo **Laboratório de Ecologia de Insetos da UFRJ** e a versão online foi desenvolvida com o apoio do **Laboratório de Geoprocessamento, Sensoriamento Remoto e Análise de Dados de Biodiversidade (GEODABI) do Instituto Nacional da Mata Atlântica (INMA)**.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/foto.png" width="700">
+  <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/foto.jpg" width="700">
 </p>
 
 Este jogo foi desenvolvido com o objetivo de conscientizar a população a respeito da importância das borboletas de maneira lúdica, além de informar sobre os serviços ecossistêmicos que elas prestam para a natureza e para nós, seres humanos. Esses serviços incluem a polinização, o biomonitoramento e a biotecnologia.
