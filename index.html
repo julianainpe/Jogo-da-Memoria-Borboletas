@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jogo da Memória</title>
+  <style>
+    :root{
+      --primary: #00796b;
+      --primary-dark:#004d40;
+      --bg:#e0f7fa;
+      --card-radius:12px;
+      --gap:16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: var(--bg);
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    h1 {
+      color: var(--primary);
+      margin: 0 0 10px;
+      line-height: 1.2;
+      font-size: clamp(20px, 3.5vw, 28px);
+    }
+
+    #score {
+      font-size: clamp(16px, 2.5vw, 20px);
+      margin-bottom: 10px;
+    }
+
+    .board {
+      display: grid;
+      gap: var(--gap);
+      width: 100%;
+      max-width: 820px;
+      grid-template-columns: repeat(2, 1fr);
+      margin: 20px 0;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      perspective: 1000px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .card-inner {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+
+    .card-front {
+      background: #fff;
+      transform: rotateY(180deg);
+    }
+
+    .card-back {
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    button {
+      padding: 14px 24px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 6px;
+    }
+
+    button:hover { background: var(--primary-dark); }
+
+    #message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(18px, 4.5vw, 28px);
+      font-weight: bold;
+      color: black;
+      display: none;
+      z-index: 1000;
+      text-align: center;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.94);
+      border-radius: 15px;
+      box-shadow: 0 0 15px var(--primary-dark);
+      max-width: min(90vw, 640px);
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Faça pares e descubra os benefícios providos pela natureza</h1>
+  <div id="score">Tentativas: 0 | Acertos: 0</div>
+
+  <div class="board" id="board" aria-live="polite"></div>
+
+  <button type="button" onclick="restartGame()">Reiniciar</button>
+
+  <div id="message" role="alert"></div>
+
+  <script>
+    const images = [
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/1.png",
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/2.png",
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/3.png",
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/4.png",
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/5.png",
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/6.png",
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/7.png",
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/8.png",
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/9.png",
+      "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/10.png"
+    ];
+    const backImage = "https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/verso.png";
+
+    const board = document.getElementById("board");
+    const scoreText = document.getElementById("score");
+    const message = document.getElementById("message");
+
+    let firstCard, secondCard;
+    let lockBoard = false;
+    let attempts = 0;
+    let matches = 0;
+    const maxAttempts = 20;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function createBoard() {
+      board.innerHTML = "";
+      attempts = 0;
+      matches = 0;
+      message.style.display = "none";
+      scoreText.textContent = "Tentativas: 0 | Acertos: 0";
+
+      const pairs = Array.from({ length: 5 }, (_, i) => i * 2);
+      let cards = [];
+      pairs.forEach(p => cards.push(p, p + 1));
+      shuffle(cards);
+
+      cards.forEach(i => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-inner">
+            <div class="card-front"><img src="${images[i]}" alt="Imagem do par" /></div>
+            <div class="card-back"><img src="${backImage}" alt="Verso da carta" /></div>
+          </div>
+        `;
+        card.addEventListener("click", () => flipCard(card, i));
+        board.appendChild(card);
+      });
+    }
+
+    function flipCard(card, index) {
+      if (lockBoard || card.classList.contains("flipped")) return;
+      if (attempts >= maxAttempts) return;
+
+      card.classList.add("flipped");
+
+      if (!firstCard) { firstCard = { card, index }; return; }
+
+      secondCard = { card, index };
+      lockBoard = true;
+      attempts++;
+      updateScore();
+      checkMatch();
+    }
+
+    function checkMatch() {
+      const isSequentialPair =
+        Math.abs(firstCard.index - secondCard.index) === 1 &&
+        Math.min(firstCard.index, secondCard.index) % 2 === 0;
+
+      if (isSequentialPair) {
+        matches++;
+        resetTurn();
+        updateScore();
+        if (matches === 5) {
+          message.innerHTML =
+            '<img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/final.png" class="blink" style="width:60px; vertical-align:middle; margin-right:8px;" alt="Ícone"> PARABÉNS! Agora você já sabe por que as borboletas são importantes!';
+          message.style.display = "block";
+        }
+      } else {
+        setTimeout(() => {
+          firstCard.card.classList.remove("flipped");
+          secondCard.card.classList.remove("flipped");
+          resetTurn();
+        }, 900);
+      }
+
+      if (attempts >= maxAttempts && matches < 5) {
+        message.textContent = "⚠️ Fim de jogo! Você atingiu o limite de tentativas.";
+        message.style.display = "block";
+      }
+    }
+
+    function updateScore() {
+      scoreText.textContent = `Tentativas: ${attempts} | Acertos: ${matches}`;
+    }
+
+    function resetTurn() {
+      [firstCard, secondCard] = [null, null];
+      lockBoard = false;
+    }
+
+    function restartGame() {
+      createBoard();
+    }
+
+    window.restartGame = restartGame;
+    createBoard();
+  </script>
+</body>
+</html>
