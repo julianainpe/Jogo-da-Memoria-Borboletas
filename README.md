@@ -17,14 +17,10 @@
 Este projeto apresenta uma versão online, mais simples e para dispositivos móveis do **Jogo da memória - Serviços Ecossistêmicos - Borboletas** em HTML/CSS/JavaScript. A versão física do jogo foi desenvolvida pelo **Laboratório de Ecologia de Insetos da UFRJ** e a versão online foi desenvolvida com o apoio do **Laboratório de Geoprocessamento, Sensoriamento Remoto e Análise de Dados de Biodiversidade (GEODABI) do Instituto Nacional da Mata Atlântica (INMA)**.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria/main/versao_fisica.jpeg" width="700">
+  <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/foto.png" width="700">
 </p>
 
-A versão online foi realizada para rodar facilmente no GitHub Pages e pode ser adaptada para outros temas aos quais o INMA tem interesse em apresentar para a comunidade em geral e em eventos científicos sobre a Mata Atlântica. Este jogo visa especificamente divulgar informações sobre os benefícios providos pela natureza, os quais também são conhecidos como serviços ecossistêmicos.
-
-O que são os **Benefícios providos pela Natureza?**
-São os bens e serviços que os ecossistemas fornecem aos seres humanos. 
-São classificados em benefícios de: provisão, regulação, suporte e culturais. 
+Este jogo foi desenvolvido com o objetivo de conscientizar a população a respeito da importância das borboletas de maneira lúdica, além de informar sobre os serviços ecossistêmicos que elas prestam para a natureza e para nós, seres humanos. Esses serviços incluem a polinização, o biomonitoramento e a biotecnologia.
 
 **Acesse a versão online do jogo aqui:**
 
