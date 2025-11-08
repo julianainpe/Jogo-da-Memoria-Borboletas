@@ -1,6 +1,6 @@
 <!-- Bloco de imagens: logo esquerda e direita -->
 <p>
-  <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-/main/logo.png" width="200" align="left">
+  <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/logo_INMA.png" width="200" align="left">
   <img src="https://raw.githubusercontent.com/julianainpe/Jogo-da-Memoria-Borboletas/main/logo.png" width="100" align="right">
 </p>
 
